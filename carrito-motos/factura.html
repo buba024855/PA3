@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura de Compra</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <style>
+    .factura {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .factura h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .factura p {
+      margin: 5px 0;
+    }
+    .factura ul {
+      list-style: none;
+      padding: 0;
+    }
+    .factura li {
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+    .botones {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .descargar, .finalizar {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+    }
+    .descargar:hover, .finalizar:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="factura" id="factura">
+    <h1>Factura de Compra</h1>
+    <p><strong>Nro. Factura:</strong> <span id="factura-numero"></span></p>
+    <p><strong>Nombre:</strong> <span id="factura-nombre"></span></p>
+    <p><strong>Correo:</strong> <span id="factura-correo"></span></p>
+    <p><strong>DNI:</strong> <span id="factura-dni"></span></p>
+    <p><strong>Dirección:</strong> <span id="factura-direccion"></span></p>
+    <p><strong>Fecha:</strong> <span id="factura-fecha"></span></p>
+    <h2>Productos:</h2>
+    <ul id="factura-productos"></ul>
+    <h3>Total: S/ <span id="factura-total">0.00</span></h3>
+    <div class="botones">
+      <button class="descargar" id="descargar-pdf">Descargar en PDF</button>
+      <a class="finalizar" href="agradecimiento.html">Finalizar Compra</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const nombre = localStorage.getItem('nombre') || 'Cliente';
+    const correo = localStorage.getItem('correo') || 'correo@ejemplo.com';
+    const dni = localStorage.getItem('dni') || '-';
+    const direccion = localStorage.getItem('direccion') || '-';
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    document.getElementById('factura-numero').textContent = 'F-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('factura-nombre').textContent = nombre;
+    document.getElementById('factura-correo').textContent = correo;
+    document.getElementById('factura-dni').textContent = dni;
+    document.getElementById('factura-direccion').textContent = direccion;
+    document.getElementById('factura-fecha').textContent = new Date().toLocaleString();
+    
+const ul = document.getElementById('factura-productos');
+let total = 0;
+
+if (Array.isArray(carrito) && carrito.length > 0) {
+  const productosAgrupados = {};
+
+  carrito.forEach(item => {
+    const nombreProducto = item.nombre;
+    const precio = parseFloat(item.precio);
+    if (!productosAgrupados[nombreProducto]) {
+      productosAgrupados[nombreProducto] = { cantidad: 0, precio };
+    }
+    productosAgrupados[nombreProducto].cantidad++;
+  });
+
+  Object.entries(productosAgrupados).forEach(([nombre, datos]) => {
+    const subtotal = datos.cantidad * datos.precio;
+    const li = document.createElement('li');
+    li.textContent = `${datos.cantidad} x ${nombre} - S/ ${subtotal.toFixed(2)}`;
+    ul.appendChild(li);
+    total += subtotal;
+  });
+} else {
+  ul.innerHTML = '<li>No hay productos en el carrito.</li>';
+}
+
+document.getElementById('factura-total').textContent = total.toFixed(2);
+
+
+    document.getElementById('factura-total').textContent = total.toFixed(2);
+
+    document.getElementById('descargar-pdf').addEventListener('click', () => {
+      const elemento = document.getElementById('factura');
+      html2pdf().from(elemento).save('factura.pdf');
+    });
+  </script>
+</body>
+</html>

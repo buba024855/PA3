@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motos Xtreme - Carrito</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+  <a href="index.html">Inicio</a>
+  <a href="#productos">Productos</a>
+  <a href="#formulario-compra">Finalizar Compra</a>
+  <a href="agradecimiento.html">Agradecimiento</a>
+</nav>
+
+  <header class="header">
+    <div class="container">
+      <h1>Motos Xtreme 🏍️</h1>
+      <p>Tu tienda online de motocross</p>
+      <button id="modoOscuroBtn">🌗 Modo Oscuro</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="busqueda">
+      <input type="text" id="buscador" placeholder="Buscar moto..." />
+    </section>
+
+    <section id="productos" class="productos"></section>
+
+    <aside class="carrito">
+      <h2>🛒 Carrito</h2>
+      <ul id="lista-carrito"></ul>
+      <p><strong>Total: S/ <span id="total">0.00</span></strong></p>
+    </aside>
+
+    <section class="formulario">
+      <h2>📦 Finalizar Compra</h2>
+      <form id="formulario-compra">
+        <input type="text" id="nombre" placeholder="Tu nombre" required />
+        <input type="email" id="email" placeholder="Tu correo electrónico" required />
+        <input type="text" id="dni" placeholder="Tu DNI" required />
+        <input type="text" id="direccion" placeholder="Tu dirección" required />
+        <button type="submit">Enviar Pedido</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Motos Xtreme - Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>

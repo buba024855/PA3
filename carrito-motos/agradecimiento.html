@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Gracias por tu compra!</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <style>
+    .agradecimiento {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      padding: 40px 20px;
+    }
+    .agradecimiento h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    .agradecimiento p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1.5s ease;
+    }
+    .agradecimiento img {
+      width: 120px;
+      margin-bottom: 30px;
+      animation: bounceIn 2s ease;
+    }
+    .agradecimiento a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #185a9d;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .agradecimiento a:hover {
+      background-color: #f1f1f1;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="agradecimiento">
+    <img src="./img/check.png" alt="Compra exitosa">
+    <h1>¡Gracias por tu compra!</h1>
+    <p>Tu pedido ha sido procesado con éxito. Te enviaremos una confirmación a tu correo.</p>
+    <a href="index.html">Volver al inicio</a>
+  </div>
+</body>
+</html>
